@@ -8,8 +8,9 @@ class AnimatedItemContainer extends StatefulWidget {
   Shape? maximizedShape;
   Function onTapClick;
   Function drawBottomItems;
+  Function drawGrid;
   AnimatedItemContainer(this.shape, this.color, this.maximizedShape,
-      this.onTapClick, this.drawBottomItems);
+      this.onTapClick, this.drawBottomItems, this.drawGrid);
 
   @override
   _AnimatedItemContainerState createState() => _AnimatedItemContainerState();
@@ -31,10 +32,6 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
       curve: Curves.fastOutSlowIn,
       child: InkWell(
         onTap: () {
-          if (widget.shape.isMaximized) {
-            // drawGrid();
-            return;
-          }
           changeState();
           widget.onTapClick();
         },
@@ -57,6 +54,11 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
   }
 
   changeState() {
+    if (widget.shape.isMaximized) {
+      widget.drawGrid();
+      return;
+    }
+
     if (widget.maximizedShape != null) {
       widget.maximizedShape!.alignment = widget.shape.alignment;
       widget.maximizedShape!.isMaximized = false;

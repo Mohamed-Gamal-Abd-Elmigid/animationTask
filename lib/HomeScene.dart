@@ -59,6 +59,8 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
                     setState(() {});
                   }, () {
                     drawBottomItems();
+                  }, () {
+                    drawGrid();
                   }),
                   SizedBox(
                     width: 20,
@@ -68,6 +70,8 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
                     setState(() {});
                   }, () {
                     drawBottomItems();
+                  }, () {
+                    drawGrid();
                   }),
                   SizedBox(
                     width: 20,
@@ -77,6 +81,8 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
                     setState(() {});
                   }, () {
                     drawBottomItems();
+                  }, () {
+                    drawGrid();
                   }),
                   SizedBox(
                     width: 20,
@@ -86,6 +92,8 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
                     setState(() {});
                   }, () {
                     drawBottomItems();
+                  }, () {
+                    drawGrid();
                   }),
                 ],
               ),
