@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedItemContainer extends StatefulWidget {
-  Alignment alignment;
-  bool isMaxmized;
-  List<Shape> shapes;
+  Shape shape;
   Color color;
+  Shape? maximizedShape;
+  Function onTapClick;
   AnimatedItemContainer(
-      this.alignment, this.isMaxmized, this.shapes, this.color);
+      this.shape, this.color, this.maximizedShape, this.onTapClick);
 
   @override
   _AnimatedItemContainerState createState() => _AnimatedItemContainerState();
@@ -20,20 +20,22 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
 
   @override
   Widget build(BuildContext context) {
+    print("Shape " + widget.shape.id.toString());
+    print("Shape " + widget.shape.isMaxmized.toString());
+    print("///////////////");
+
     return AnimatedAlign(
-      alignment: widget.alignment,
+      alignment: widget.shape.alignment,
       duration: const Duration(seconds: 1),
       curve: Curves.fastOutSlowIn,
-      onEnd: () {},
       child: InkWell(
         onTap: () {
-          if (widget.isMaxmized) {
+          if (widget.shape.isMaxmized) {
             // drawGrid();
             return;
           }
-          setState(() {
-            changeState();
-          });
+          changeState();
+          widget.onTapClick();
         },
         child: AnimatedSize(
           duration: const Duration(seconds: 1),
@@ -44,8 +46,8 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
               borderRadius: BorderRadius.circular(25),
               color: widget.color,
             ),
-            width: widget.isMaxmized ? 200 : 100,
-            height: widget.isMaxmized ? 200 : 100,
+            width: widget.shape.isMaxmized ? 200 : 100,
+            height: widget.shape.isMaxmized ? 200 : 100,
             child: const FlutterLogo(size: 100),
           ),
         ),
@@ -53,26 +55,10 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
     );
   }
 
-  Shape? _getMaximizedShape() {
-    for (var shape in widget.shapes) {
-      if (shape.isMaxmized) return shape;
-    }
-    return widget.shapes.length > 0 ? widget.shapes[0] : null;
-  }
-
   changeState() {
-    _getMaximizedShape()!.alignment = widget.alignment;
-    _getMaximizedShape()!.isMaxmized = false;
-    widget.alignment = Alignment.center;
-    widget.isMaxmized = true;
-    setState(() {});
+    widget.maximizedShape!.alignment = widget.shape.alignment;
+    widget.maximizedShape!.isMaxmized = false;
+    widget.shape.alignment = Alignment.center;
+    widget.shape.isMaxmized = true;
   }
-
-  // Shape? _getTempShape() {
-  //   print("sss" + widget.shapes.length.toString());
-  //   for (var shape in widget.shapes) {
-  //     if (shape.alignment == Alignment.center) return shape;
-  //   }
-  //   return widget.shapes.length > 0 ? widget.shapes[0] : null;
-  // }
 }

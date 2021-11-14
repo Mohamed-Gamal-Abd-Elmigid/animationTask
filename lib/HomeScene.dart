@@ -19,26 +19,11 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
   var shape3 = Shape(Alignment.bottomCenter, false, 3);
   var shape4 = Shape(Alignment.bottomRight, false, 4);
 
-  Alignment lastItemSelectedAlign = Alignment.center;
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // shape1.alignment = Alignment.center;
-    // shape1.isMaxmized = true;
-    // shape1.id = 1;
-    // shape2.alignment = Alignment.bottomLeft;
-    // shape2.isMaxmized = false;
-    // shape2.id = 2;
-    // shape3.alignment = Alignment.bottomCenter;
-    // shape3.isMaxmized = false;
-    // shape3.id = 3;
-    // shape4.alignment = Alignment.bottomRight;
-    // shape4.isMaxmized = false;
-    // shape4.id = 4;
-
-    // shapes = [shape1, shape2, shape3, shape4];
+    drawGrid();
     shapes.add(shape1);
     shapes.add(shape2);
     shapes.add(shape3);
@@ -61,148 +46,39 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
               height: 400,
               child: Stack(
                 children: [
-                  // Align(
-                  //   alignment: Alignment.topCenter,
-                  //   child: Image.asset(
-                  //     "assets/logo.jpg",
-                  //     width: 100,
-                  //     height: 100,
-                  //   ),
-                  // ),
-
-                  AnimatedAlign(
-                    alignment: shape1.alignment,
-                    duration: const Duration(seconds: 1),
-                    curve: Curves.fastOutSlowIn,
-                    onEnd: () {},
-                    child: InkWell(
-                      onTap: () {
-                        if (shape1.isMaxmized) {
-                          // drawGrid();
-                          return;
-                        }
-                        setState(() {
-                          _getMaximizedShape()!.alignment = shape1.alignment;
-                          _getMaximizedShape()!.isMaxmized = false;
-                          shape1.alignment = Alignment.center;
-                          shape1.isMaxmized = true;
-                        });
-                      },
-                      child: AnimatedSize(
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeIn,
-                        vsync: this,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Colors.white,
-                          ),
-                          width: shape1.isMaxmized ? 200 : 100,
-                          height: shape1.isMaxmized ? 200 : 100,
-                          child: const FlutterLogo(size: 100),
-                        ),
-                      ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Image.asset(
+                      "assets/logo.jpg",
+                      width: 100,
+                      height: 100,
                     ),
                   ),
+                  AnimatedItemContainer(
+                      shape1, Colors.white, _getMaximizedShape(), () {
+                    setState(() {});
+                  }),
                   SizedBox(
                     width: 20,
                   ),
-                  AnimatedAlign(
-                    alignment: shape2.alignment,
-                    duration: const Duration(seconds: 1),
-                    curve: Curves.fastOutSlowIn,
-                    onEnd: () {},
-                    child: InkWell(
-                      onTap: () {
-                        if (shape2.isMaxmized) return;
-                        setState(() {
-                          _getMaximizedShape()!.alignment = shape2.alignment;
-                          _getMaximizedShape()!.isMaxmized = false;
-                          shape2.alignment = Alignment.center;
-                          shape2.isMaxmized = true;
-                        });
-                      },
-                      child: AnimatedSize(
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeIn,
-                        vsync: this,
-                        child: Container(
-                          width: shape2.isMaxmized ? 200 : 100,
-                          height: shape2.isMaxmized ? 200 : 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            color: Colors.red,
-                          ), // child: const FlutterLogo(size: 100),
-                        ),
-                      ),
-                    ),
-                  ),
+                  AnimatedItemContainer(
+                      shape2, Colors.yellow, _getMaximizedShape(), () {
+                    setState(() {});
+                  }),
                   SizedBox(
                     width: 20,
                   ),
-                  AnimatedAlign(
-                    alignment: shape3.alignment,
-                    duration: const Duration(seconds: 2),
-                    curve: Curves.fastOutSlowIn,
-                    child: InkWell(
-                      onTap: () {
-                        if (shape3.isMaxmized) return;
-                        setState(() {
-                          lastItemSelectedAlign = shape3.alignment;
-                          _getMaximizedShape()!.alignment = shape3.alignment;
-                          _getMaximizedShape()!.isMaxmized = false;
-                          shape3.alignment = Alignment.center;
-                          shape3.isMaxmized = true;
-                        });
-                      },
-                      child: AnimatedSize(
-                        duration: const Duration(seconds: 2),
-                        curve: Curves.easeIn,
-                        vsync: this,
-                        child: Container(
-                          width: shape3.isMaxmized ? 200 : 100,
-                          height: shape3.isMaxmized ? 200 : 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.black87,
-                          ), // child: const FlutterLogo(size: 100),
-                        ),
-                      ),
-                    ),
-                  ),
+                  AnimatedItemContainer(
+                      shape3, Colors.red, _getMaximizedShape(), () {
+                    setState(() {});
+                  }),
                   SizedBox(
                     width: 20,
                   ),
-                  AnimatedAlign(
-                    alignment: shape4.alignment,
-                    duration: const Duration(seconds: 2),
-                    curve: Curves.fastOutSlowIn,
-                    child: InkWell(
-                      onTap: () {
-                        if (shape4.isMaxmized) return;
-                        setState(() {
-                          lastItemSelectedAlign = shape4.alignment;
-                          _getMaximizedShape()!.alignment = shape4.alignment;
-                          _getMaximizedShape()!.isMaxmized = false;
-                          shape4.alignment = Alignment.center;
-                          shape4.isMaxmized = true;
-                        });
-                      },
-                      child: AnimatedSize(
-                        duration: const Duration(seconds: 2),
-                        curve: Curves.easeIn,
-                        vsync: this,
-                        child: Container(
-                          width: shape4.isMaxmized ? 200 : 100,
-                          height: shape4.isMaxmized ? 200 : 100,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: Colors.yellow,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  AnimatedItemContainer(
+                      shape4, Colors.green, _getMaximizedShape(), () {
+                    setState(() {});
+                  }),
                 ],
               ),
             ),
@@ -210,6 +86,19 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
         ),
       ),
     );
+  }
+
+  drawGrid() {
+    setState(() {
+      // shape1.alignment = Alignment.centerLeft;
+      // shape1.isMaxmized = false;
+      // shape2.alignment = Alignment.centerRight;
+      // shape2.isMaxmized = false;
+      // shape3.alignment = Alignment.bottomLeft;
+      // shape3.isMaxmized = false;
+      // shape4.alignment = Alignment.bottomRight;
+      // shape4.isMaxmized = false;
+    });
   }
 
   Shape? _getMaximizedShape() {
