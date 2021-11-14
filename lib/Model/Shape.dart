@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 
 class Shape {
   int id;
-  bool isMaxmized;
+  bool isMaximized;
   Alignment alignment;
 
-  Shape(this.alignment, this.isMaxmized, this.id);
+  Shape(this.alignment, this.isMaximized, this.id);
 }

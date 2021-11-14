@@ -7,8 +7,9 @@ class AnimatedItemContainer extends StatefulWidget {
   Color color;
   Shape? maximizedShape;
   Function onTapClick;
-  AnimatedItemContainer(
-      this.shape, this.color, this.maximizedShape, this.onTapClick);
+  Function drawBottomItems;
+  AnimatedItemContainer(this.shape, this.color, this.maximizedShape,
+      this.onTapClick, this.drawBottomItems);
 
   @override
   _AnimatedItemContainerState createState() => _AnimatedItemContainerState();
@@ -21,7 +22,7 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
   @override
   Widget build(BuildContext context) {
     print("Shape " + widget.shape.id.toString());
-    print("Shape " + widget.shape.isMaxmized.toString());
+    print("Shape " + widget.shape.isMaximized.toString());
     print("///////////////");
 
     return AnimatedAlign(
@@ -30,7 +31,7 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
       curve: Curves.fastOutSlowIn,
       child: InkWell(
         onTap: () {
-          if (widget.shape.isMaxmized) {
+          if (widget.shape.isMaximized) {
             // drawGrid();
             return;
           }
@@ -46,8 +47,8 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
               borderRadius: BorderRadius.circular(25),
               color: widget.color,
             ),
-            width: widget.shape.isMaxmized ? 200 : 100,
-            height: widget.shape.isMaxmized ? 200 : 100,
+            width: widget.shape.isMaximized ? 200 : 100,
+            height: widget.shape.isMaximized ? 200 : 100,
             child: const FlutterLogo(size: 100),
           ),
         ),
@@ -56,9 +57,18 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
   }
 
   changeState() {
-    widget.maximizedShape!.alignment = widget.shape.alignment;
-    widget.maximizedShape!.isMaxmized = false;
+    if (widget.maximizedShape != null) {
+      widget.maximizedShape!.alignment = widget.shape.alignment;
+      widget.maximizedShape!.isMaximized = false;
+      setMaximizedItem();
+    } else {
+      setMaximizedItem();
+      widget.drawBottomItems();
+    }
+  }
+
+  setMaximizedItem() {
     widget.shape.alignment = Alignment.center;
-    widget.shape.isMaxmized = true;
+    widget.shape.isMaximized = true;
   }
 }

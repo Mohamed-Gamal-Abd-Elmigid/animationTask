@@ -57,6 +57,8 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
                   AnimatedItemContainer(
                       shape1, Colors.white, _getMaximizedShape(), () {
                     setState(() {});
+                  }, () {
+                    drawBottomItems();
                   }),
                   SizedBox(
                     width: 20,
@@ -64,6 +66,8 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
                   AnimatedItemContainer(
                       shape2, Colors.yellow, _getMaximizedShape(), () {
                     setState(() {});
+                  }, () {
+                    drawBottomItems();
                   }),
                   SizedBox(
                     width: 20,
@@ -71,6 +75,8 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
                   AnimatedItemContainer(
                       shape3, Colors.red, _getMaximizedShape(), () {
                     setState(() {});
+                  }, () {
+                    drawBottomItems();
                   }),
                   SizedBox(
                     width: 20,
@@ -78,6 +84,8 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
                   AnimatedItemContainer(
                       shape4, Colors.green, _getMaximizedShape(), () {
                     setState(() {});
+                  }, () {
+                    drawBottomItems();
                   }),
                 ],
               ),
@@ -90,21 +98,39 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
 
   drawGrid() {
     setState(() {
-      // shape1.alignment = Alignment.centerLeft;
-      // shape1.isMaxmized = false;
-      // shape2.alignment = Alignment.centerRight;
-      // shape2.isMaxmized = false;
-      // shape3.alignment = Alignment.bottomLeft;
-      // shape3.isMaxmized = false;
-      // shape4.alignment = Alignment.bottomRight;
-      // shape4.isMaxmized = false;
+      shape1.alignment = Alignment.centerLeft;
+      shape1.isMaximized = false;
+      shape2.alignment = Alignment.centerRight;
+      shape2.isMaximized = false;
+      shape3.alignment = Alignment.bottomLeft;
+      shape3.isMaximized = false;
+      shape4.alignment = Alignment.bottomRight;
+      shape4.isMaximized = false;
     });
   }
 
   Shape? _getMaximizedShape() {
     for (var shape in shapes) {
-      if (shape.isMaxmized) return shape;
+      if (shape.isMaximized) return shape;
     }
-    return shapes.length > 0 ? shapes[0] : null;
+    return null;
+  }
+
+  drawBottomItems() {
+    int alignmentIndex = 0;
+
+    List<Alignment> alignments = [];
+    alignments.add(Alignment.bottomLeft);
+    alignments.add(Alignment.bottomCenter);
+    alignments.add(Alignment.bottomRight);
+
+    setState(() {
+      for (int i = 0; i < shapes.length; i++) {
+        if (!shapes[i].isMaximized) {
+          shapes[i].alignment = alignments[alignmentIndex];
+          alignmentIndex++;
+        }
+      }
+    });
   }
 }
