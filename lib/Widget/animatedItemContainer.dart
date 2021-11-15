@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 
 class AnimatedItemContainer extends StatefulWidget {
   Shape shape;
-  Color color;
   Shape? maximizedShape;
   Function onTapClick;
   Function drawBottomItems;
   Function drawGrid;
-  AnimatedItemContainer(this.shape, this.color, this.maximizedShape,
-      this.onTapClick, this.drawBottomItems, this.drawGrid);
+  AnimatedItemContainer(this.shape, this.maximizedShape, this.onTapClick,
+      this.drawBottomItems, this.drawGrid);
 
   @override
   _AnimatedItemContainerState createState() => _AnimatedItemContainerState();
@@ -35,24 +34,40 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
           curve: Curves.easeOutQuint,
           vsync: this,
           child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(
-                color:
-                    widget.shape.isMaximized ? Color(0xFF12d6d4) : Colors.black,
-                width: 4,
-              ),
-              color: widget.color,
+            width: widget.shape.isMaximized ? 200 : 110,
+            height: widget.shape.isMaximized ? 200 : 110,
+            color: Colors.teal,
+            child: Column(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                        color: widget.shape.isMaximized
+                            ? Color(0xFF12d6d4)
+                            : Colors.transparent,
+                        width: 4,
+                      ),
+                    ),
+                    width: widget.shape.isMaximized ? 150 : 80,
+                    height: widget.shape.isMaximized ? 150 : 80,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16),
+                        child: Image.asset(
+                          widget.shape.imagePath,
+                          width: widget.shape.isMaximized ? 50 : 20,
+                          height: widget.shape.isMaximized ? 50 : 20,
+                          fit: BoxFit.cover,
+                        ))),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "MMMMMMM",
+                  style: TextStyle(color: Colors.white),
+                )
+              ],
             ),
-            width: widget.shape.isMaximized ? 200 : 100,
-            height: widget.shape.isMaximized ? 200 : 100,
-            child: Image.asset(
-              widget.shape.imagePath,
-              width: 100,
-              height: 100,
-              fit: BoxFit.cover,
-            ),
-            // child: const FlutterLogo(size: 100),
           ),
         ),
       ),
@@ -70,7 +85,6 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
       widget.maximizedShape!.isMaximized = false;
       setItemAsMaximized();
     } else {
-      // when user in grid state then, Maximized item = null
       setItemAsMaximized();
       widget.drawBottomItems();
     }

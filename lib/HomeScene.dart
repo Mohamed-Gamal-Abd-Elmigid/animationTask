@@ -58,45 +58,30 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
               child: Container(
                 width: MediaQuery.of(context).size.width / 1.15,
                 height: MediaQuery.of(context).size.height / 1.8,
-                // padding: EdgeInsets.all(20),
-
                 child: Stack(
                   children: [
-                    AnimatedItemContainer(
-                        shape1, Colors.white, _getMaximizedShape(), () {
+                    AnimatedItemContainer(shape1, _getMaximizedShape(), () {
                       setState(() {});
                     }, () {
                       drawBottomItems();
                     }, () {
                       drawGrid();
                     }),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    AnimatedItemContainer(
-                        shape2, Colors.yellow, _getMaximizedShape(), () {
+                    AnimatedItemContainer(shape2, _getMaximizedShape(), () {
                       setState(() {});
                     }, () {
                       drawBottomItems();
                     }, () {
                       drawGrid();
                     }),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    AnimatedItemContainer(
-                        shape3, Colors.red, _getMaximizedShape(), () {
+                    AnimatedItemContainer(shape3, _getMaximizedShape(), () {
                       setState(() {});
                     }, () {
                       drawBottomItems();
                     }, () {
                       drawGrid();
                     }),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    AnimatedItemContainer(
-                        shape4, Colors.green, _getMaximizedShape(), () {
+                    AnimatedItemContainer(shape4, _getMaximizedShape(), () {
                       setState(() {});
                     }, () {
                       drawBottomItems();
