@@ -1,5 +1,10 @@
 # Animated Task
 
+<img width="271" alt="Screen Shot 2021-11-15 at 6 29 18 PM" src="https://user-images.githubusercontent.com/60290194/141819233-2d0c32a7-c4c1-4bf0-b2b2-a4155df09f4a.png">
+
+<img width="267" alt="Screen Shot 2021-11-15 at 6 29 09 PM" src="https://user-images.githubusercontent.com/60290194/141819259-a911c2a0-e372-4b56-978a-e0ebd814c5b7.png">
+
+
 This is animated task sent to me with this line : https://xd.adobe.com/view/acaadcdb-b549-41f4-97c0-be2cbb38b788-f9f9/
 
 this is scenarios that user will excute on scene: 
