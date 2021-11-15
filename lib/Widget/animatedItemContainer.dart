@@ -18,35 +18,41 @@ class AnimatedItemContainer extends StatefulWidget {
 
 class _AnimatedItemContainerState extends State<AnimatedItemContainer>
     with TickerProviderStateMixin {
-  Alignment lastItemSelectedAlign = Alignment.center;
-
+  bool isBoarder = false;
   @override
   Widget build(BuildContext context) {
-    print("Shape " + widget.shape.id.toString());
-    print("Shape " + widget.shape.isMaximized.toString());
-    print("///////////////");
-
     return AnimatedAlign(
       alignment: widget.shape.alignment,
       duration: const Duration(seconds: 1),
-      curve: Curves.fastOutSlowIn,
-      child: InkWell(
+      curve: Curves.easeOutQuad,
+      child: GestureDetector(
         onTap: () {
           changeState();
           widget.onTapClick();
         },
         child: AnimatedSize(
-          duration: const Duration(seconds: 1),
-          curve: Curves.easeIn,
+          duration: const Duration(seconds: 2),
+          curve: Curves.easeOutQuint,
           vsync: this,
           child: Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25),
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(
+                color:
+                    widget.shape.isMaximized ? Color(0xFF12d6d4) : Colors.black,
+                width: 4,
+              ),
               color: widget.color,
             ),
             width: widget.shape.isMaximized ? 200 : 100,
             height: widget.shape.isMaximized ? 200 : 100,
-            child: const FlutterLogo(size: 100),
+            child: Image.asset(
+              widget.shape.imagePath,
+              width: 100,
+              height: 100,
+              fit: BoxFit.cover,
+            ),
+            // child: const FlutterLogo(size: 100),
           ),
         ),
       ),
@@ -62,15 +68,16 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
     if (widget.maximizedShape != null) {
       widget.maximizedShape!.alignment = widget.shape.alignment;
       widget.maximizedShape!.isMaximized = false;
-      setMaximizedItem();
+      setItemAsMaximized();
     } else {
-      setMaximizedItem();
+      // when user in grid state then, Maximized item = null
+      setItemAsMaximized();
       widget.drawBottomItems();
     }
   }
 
-  setMaximizedItem() {
-    widget.shape.alignment = Alignment.center;
+  setItemAsMaximized() {
+    widget.shape.alignment = Alignment.topCenter;
     widget.shape.isMaximized = true;
   }
 }

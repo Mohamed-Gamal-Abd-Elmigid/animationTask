@@ -1,3 +1,4 @@
+import 'package:animatedtask/UI/AppAssets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,107 +15,113 @@ class HomeScene extends StatefulWidget {
 class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
   List<Shape> shapes = [];
 
-  var shape1 = Shape(Alignment.center, true, 1);
-  var shape2 = Shape(Alignment.bottomLeft, false, 2);
-  var shape3 = Shape(Alignment.bottomCenter, false, 3);
-  var shape4 = Shape(Alignment.bottomRight, false, 4);
+  var shape1 =
+      Shape(Alignment.center, true, 1, "First one", AppAssets.SHAPE1_IMAGE);
+  var shape2 = Shape(
+      Alignment.bottomLeft, false, 2, "Second One", AppAssets.SHAPE2_IMAGE);
+  var shape3 = Shape(
+      Alignment.bottomCenter, false, 3, "Thirs One", AppAssets.SHAPE3_IMAGE);
+  var shape4 = Shape(
+      Alignment.bottomRight, false, 4, "Fourth One", AppAssets.SHAPE4_IMAGE);
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    drawGrid();
     shapes.add(shape1);
     shapes.add(shape2);
     shapes.add(shape3);
     shapes.add(shape4);
+    drawGrid();
   }
 
+  //                color: Colors.black87,
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Center(
-          child: Container(
-            padding: EdgeInsets.all(30),
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: Colors.black87,
-            child: Container(
-              color: Colors.teal,
-              width: 400,
-              height: 400,
-              child: Stack(
-                children: [
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Image.asset(
-                      "assets/logo.jpg",
-                      width: 100,
-                      height: 100,
-                    ),
-                  ),
-                  AnimatedItemContainer(
-                      shape1, Colors.white, _getMaximizedShape(), () {
-                    setState(() {});
-                  }, () {
-                    drawBottomItems();
-                  }, () {
-                    drawGrid();
-                  }),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  AnimatedItemContainer(
-                      shape2, Colors.yellow, _getMaximizedShape(), () {
-                    setState(() {});
-                  }, () {
-                    drawBottomItems();
-                  }, () {
-                    drawGrid();
-                  }),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  AnimatedItemContainer(
-                      shape3, Colors.red, _getMaximizedShape(), () {
-                    setState(() {});
-                  }, () {
-                    drawBottomItems();
-                  }, () {
-                    drawGrid();
-                  }),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  AnimatedItemContainer(
-                      shape4, Colors.green, _getMaximizedShape(), () {
-                    setState(() {});
-                  }, () {
-                    drawBottomItems();
-                  }, () {
-                    drawGrid();
-                  }),
-                ],
+        backgroundColor: Colors.white10,
+        body: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Image.asset(
+                "assets/logo.jpg",
+                width: MediaQuery.of(context).size.width / 4,
+                height: MediaQuery.of(context).size.height / 5,
               ),
             ),
-          ),
+            Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width / 1.15,
+                height: MediaQuery.of(context).size.height / 1.8,
+                // padding: EdgeInsets.all(20),
+
+                child: Stack(
+                  children: [
+                    AnimatedItemContainer(
+                        shape1, Colors.white, _getMaximizedShape(), () {
+                      setState(() {});
+                    }, () {
+                      drawBottomItems();
+                    }, () {
+                      drawGrid();
+                    }),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    AnimatedItemContainer(
+                        shape2, Colors.yellow, _getMaximizedShape(), () {
+                      setState(() {});
+                    }, () {
+                      drawBottomItems();
+                    }, () {
+                      drawGrid();
+                    }),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    AnimatedItemContainer(
+                        shape3, Colors.red, _getMaximizedShape(), () {
+                      setState(() {});
+                    }, () {
+                      drawBottomItems();
+                    }, () {
+                      drawGrid();
+                    }),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    AnimatedItemContainer(
+                        shape4, Colors.green, _getMaximizedShape(), () {
+                      setState(() {});
+                    }, () {
+                      drawBottomItems();
+                    }, () {
+                      drawGrid();
+                    }),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
   drawGrid() {
-    setState(() {
-      shape1.alignment = Alignment.centerLeft;
-      shape1.isMaximized = false;
-      shape2.alignment = Alignment.centerRight;
-      shape2.isMaximized = false;
-      shape3.alignment = Alignment.bottomLeft;
-      shape3.isMaximized = false;
-      shape4.alignment = Alignment.bottomRight;
-      shape4.isMaximized = false;
-    });
+    shape1.alignment = Alignment.topLeft;
+    shape1.isMaximized = false;
+    shape2.alignment = Alignment.topRight;
+    shape2.isMaximized = false;
+    shape3.alignment = Alignment.bottomLeft;
+    shape3.isMaximized = false;
+    shape4.alignment = Alignment.bottomRight;
+    shape4.isMaximized = false;
   }
 
   Shape? _getMaximizedShape() {
@@ -132,13 +139,11 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
     alignments.add(Alignment.bottomCenter);
     alignments.add(Alignment.bottomRight);
 
-    setState(() {
-      for (int i = 0; i < shapes.length; i++) {
-        if (!shapes[i].isMaximized) {
-          shapes[i].alignment = alignments[alignmentIndex];
-          alignmentIndex++;
-        }
+    for (int i = 0; i < shapes.length; i++) {
+      if (!shapes[i].isMaximized) {
+        shapes[i].alignment = alignments[alignmentIndex];
+        alignmentIndex++;
       }
-    });
+    }
   }
 }
