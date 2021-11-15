@@ -1,16 +1,28 @@
-# animatedtask
+# Animated Task
 
-A new Flutter application.
+This is animated task sent to me with this line : https://xd.adobe.com/view/acaadcdb-b549-41f4-97c0-be2cbb38b788-f9f9/
 
-## Getting Started
+this is scenarios that user will excute on scene: 
 
-This project is a starting point for a Flutter application.
+### <a name="AC1">AC1</a>
+- as a user land on screen. 
+- draw 4 item in a grid,
 
-A few resources to get you started if this is your first Flutter project:
+### <a name="AC2">AC2</a>
+- user land on screen when user click in a minimized item in grid. 
+- set a clicked item state as Maximized and set rest of items as minimized.
+     
+### <a name="AC3">AC3</a>
+- user land on screen 
+- user click in a maximized item.
+- set clicked item state as minimized and set rest of items as minimized.
+     
+### <a name="AC4">AC4</a>
+- user land on screen 
+- user click in a minimized item that placed in bottom.
+- set a clicked item state as Maximized and set maximized item state to minimized .
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+resources helped me to get animation in task:
+- [AnimatedPositioned class](https://api.flutter.dev/flutter/widgets/AnimatedAlign-class.html)
+- [AnimatedAlign class](https://api.flutter.dev/flutter/widgets/AnimatedPositioned-class.html)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
