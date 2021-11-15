@@ -34,37 +34,45 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
           curve: Curves.easeOutQuint,
           vsync: this,
           child: Container(
-            width: widget.shape.isMaximized ? 200 : 110,
-            height: widget.shape.isMaximized ? 200 : 110,
-            color: Colors.teal,
+            width: widget.shape.isMaximized ? 200 : 130,
+            height: widget.shape.isMaximized ? 200 : 130,
             child: Column(
               children: [
                 Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(
-                        color: widget.shape.isMaximized
-                            ? Color(0xFF12d6d4)
-                            : Colors.transparent,
-                        width: 4,
-                      ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      color: widget.shape.isMaximized
+                          ? Color(0xFF12d6d4)
+                          : Colors.transparent,
+                      width: 4,
                     ),
-                    width: widget.shape.isMaximized ? 150 : 80,
-                    height: widget.shape.isMaximized ? 150 : 80,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(16),
-                        child: Image.asset(
-                          widget.shape.imagePath,
-                          width: widget.shape.isMaximized ? 50 : 20,
-                          height: widget.shape.isMaximized ? 50 : 20,
-                          fit: BoxFit.cover,
-                        ))),
+                  ),
+                  width: widget.shape.isMaximized ? 190 : 90,
+                  height: widget.shape.isMaximized ? 190 : 80,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      widget.shape.imagePath,
+                      width: widget.shape.isMaximized ? 200 : 50,
+                      height: widget.shape.isMaximized ? 200 : 50,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  "MMMMMMM",
-                  style: TextStyle(color: Colors.white),
+                Visibility(
+                  visible: widget.shape.isMaximized == false,
+                  child: Text(
+                    "${widget.shape.title}",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 2,
+                  ),
                 )
               ],
             ),

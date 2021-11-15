@@ -14,15 +14,16 @@ class HomeScene extends StatefulWidget {
 
 class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
   List<Shape> shapes = [];
+  Shape? selectedShape;
 
   var shape1 =
-      Shape(Alignment.center, true, 1, "First one", AppAssets.SHAPE1_IMAGE);
-  var shape2 = Shape(
-      Alignment.bottomLeft, false, 2, "Second One", AppAssets.SHAPE2_IMAGE);
+      Shape(Alignment.center, true, 1, "Smart Cities", AppAssets.SHAPE1_IMAGE);
+  var shape2 = Shape(Alignment.bottomLeft, false, 2, "Digital Transformation",
+      AppAssets.SHAPE2_IMAGE);
   var shape3 = Shape(
-      Alignment.bottomCenter, false, 3, "Thirs One", AppAssets.SHAPE3_IMAGE);
-  var shape4 = Shape(
-      Alignment.bottomRight, false, 4, "Fourth One", AppAssets.SHAPE4_IMAGE);
+      Alignment.bottomCenter, false, 3, "Security", AppAssets.SHAPE3_IMAGE);
+  var shape4 =
+      Shape(Alignment.bottomRight, false, 4, "Health", AppAssets.SHAPE4_IMAGE);
 
   @override
   void initState() {
@@ -56,41 +57,62 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
             ),
             Center(
               child: Container(
-                width: MediaQuery.of(context).size.width / 1.15,
-                height: MediaQuery.of(context).size.height / 1.8,
-                child: Stack(
-                  children: [
-                    AnimatedItemContainer(shape1, _getMaximizedShape(), () {
-                      setState(() {});
-                    }, () {
-                      drawBottomItems();
-                    }, () {
-                      drawGrid();
-                    }),
-                    AnimatedItemContainer(shape2, _getMaximizedShape(), () {
-                      setState(() {});
-                    }, () {
-                      drawBottomItems();
-                    }, () {
-                      drawGrid();
-                    }),
-                    AnimatedItemContainer(shape3, _getMaximizedShape(), () {
-                      setState(() {});
-                    }, () {
-                      drawBottomItems();
-                    }, () {
-                      drawGrid();
-                    }),
-                    AnimatedItemContainer(shape4, _getMaximizedShape(), () {
-                      setState(() {});
-                    }, () {
-                      drawBottomItems();
-                    }, () {
-                      drawGrid();
-                    }),
-                  ],
-                ),
-              ),
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height / 1.8,
+                  child: Stack(
+                    children: [
+                      _getMaximizedShape() != null
+                          ? Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                selectedShape != null
+                                    ? selectedShape!.title
+                                    : "",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 24,
+                                ),
+                              ),
+                            )
+                          : Container(),
+                      AnimatedItemContainer(shape1, _getMaximizedShape(), () {
+                        setState(() {
+                          selectedShape = shape1;
+                        });
+                      }, () {
+                        drawBottomItems();
+                      }, () {
+                        drawGrid();
+                      }),
+                      AnimatedItemContainer(shape2, _getMaximizedShape(), () {
+                        setState(() {
+                          selectedShape = shape2;
+                        });
+                      }, () {
+                        drawBottomItems();
+                      }, () {
+                        drawGrid();
+                      }),
+                      AnimatedItemContainer(shape3, _getMaximizedShape(), () {
+                        setState(() {
+                          selectedShape = shape3;
+                        });
+                      }, () {
+                        drawBottomItems();
+                      }, () {
+                        drawGrid();
+                      }),
+                      AnimatedItemContainer(shape4, _getMaximizedShape(), () {
+                        setState(() {
+                          selectedShape = shape4;
+                        });
+                      }, () {
+                        drawBottomItems();
+                      }, () {
+                        drawGrid();
+                      }),
+                    ],
+                  )),
             ),
           ],
         ),
