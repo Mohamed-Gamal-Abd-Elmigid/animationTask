@@ -36,7 +36,6 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
     drawGrid();
   }
 
-  //                color: Colors.black87,
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -69,7 +68,7 @@ class _HomeSceneState extends State<HomeScene> with TickerProviderStateMixin {
                                     ? selectedShape!.title
                                     : "",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Color(0xFF12d6d4),
                                   fontSize: 24,
                                 ),
                               ),

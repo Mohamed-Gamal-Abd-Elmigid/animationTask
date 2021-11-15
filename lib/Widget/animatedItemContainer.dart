@@ -68,7 +68,7 @@ class _AnimatedItemContainerState extends State<AnimatedItemContainer>
                   child: Text(
                     "${widget.shape.title}",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Color(0xFF12d6d4),
                     ),
                     textAlign: TextAlign.center,
                     maxLines: 2,
